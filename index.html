@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whiteboard App</title>
+  <!-- <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script> -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Whiteboard</h1>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <canvas id="myCanvas" height="600" width="1100"></canvas>
+  <div class="js-test"></div>
+  <script>
+    const canvas = document.getElementById("myCanvas");
+    // const stage = new createjs.Stage(canvas);
+    const context = canvas.getContext("2d");
+
+    // context.beginPath();
+    // context.moveTo(45, 63);
+    // context.lineTo(45, 78);
+    // context.closePath();
+    // context.lineWidth = 50;
+    // context.stroke();
+
+    // context.fillStyle = 'blue';
+    // document.addEventListener('mousedown', handleClick);
+    // function handleClick(event) {
+    //   context.beginPath();
+    //   context.arc(event.clientX, event.clientY, 3, 0, 2 * Math.PI);
+    //   context.fill();
+    //   console.log(event.clientX);
+    // }
+
+    // context.lineTo(45, 86);
+
+    // bringing in a cursor
+
+
+
+    // typing in the canvas part:
+
+    context.font = '50px Times New Roman';
+    let keys = '';
+    const keyActions = {
+      'Tab': () => {
+        console.log("tab pressed");
+      },
+      'Enter': () => {
+        console.log("enter pressed");     
+      },
+      'Shift': () => {
+        console.log("shift key pressed");
+      },
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    function decideKey(key){
+      if(keyActions[key]){
+        keyActions[key]();
+      }else{
+        return key;
+      }
+
+    }
+    function handleKeyDown(event) {
+      workingKey = decideKey(event.key)
+      keys += workingKey;
+      console.log(keys);
+      context.fillText(keys, 40, 86);
+    }
+
+
+
+
+    // drawing in the canvas part:
+
+    let isMouseDown = false;
+    let lastX, lastY;
+
+    canvas.addEventListener('mousedown', handleMouseDown);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseup', handleMouseUp);
+
+    function handleMouseDown(event) {
+      isMouseDown = true;
+      lastX = event.clientX - canvas.getBoundingClientRect().left;
+      lastY = event.clientY - canvas.getBoundingClientRect().top;
+      context.beginPath();
+      context.moveTo(lastX,lastY);
+    }
+
+    function handleMouseMove(event) {
+      if (isMouseDown) {
+        currentX = event.clientX - canvas.getBoundingClientRect().left;
+        currentY = event.clientY - canvas.getBoundingClientRect().top;
+
+        // context.beginPath();
+        // context.moveTo(200,300);
+        // context.quadraticCurveTo(300,400,400,300);
+        // context.stroke();
+
+        const cpX = (lastX + currentX)/2;
+        const cpY = (lastY + currentY)/2;
+        document.querySelector('.js-test').innerHTML = cpX;
+        console.log(cpX);
+        context.quadraticCurveTo(cpX, cpY, currentX, currentY);
+
+        // context.beginPath();
+        // context.moveTo(currentX, currentY);
+
+        lastX = currentX;
+        lastY = currentY;
+
+        context.stroke();
+        // stage.update();
+      }
+    }
+
+    function handleMouseUp() {
+      isMouseDown = false;
+    }
+  </script>
+
+</body>
+</html>
