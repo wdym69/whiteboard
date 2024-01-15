@@ -110,8 +110,8 @@
         // context.quadraticCurveTo(300,400,400,300);
         // context.stroke();
 
-        const cpX = (lastX + currentX)/2;
-        const cpY = (lastY + currentY)/2;
+        const cpX = (lastX + currentX)/3;
+        const cpY = (lastY + currentY)/3;
         document.querySelector('.js-test').innerHTML = cpX;
         console.log(cpX);
         context.quadraticCurveTo(cpX, cpY, currentX, currentY);
