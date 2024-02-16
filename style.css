@@ -15,28 +15,29 @@ h1 {
   margin: 0;
 }
 
-nav {
+/* nav {
   background-color: #333;
   text-align: center;
   padding: 10px;
-}
+} */
 
-nav a {
+/* nav a {
   color: white;
   text-decoration: none;
   padding: 10px;
   margin: 0 10px;
   transition: color 0.3s;
-}
+} */
 
-nav a:hover {
+/* nav a:hover {
   color: #ffcc00;
-}
+} */
 
 canvas {
   border: 2px solid black;
   display: block;
   margin: 20px auto;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .js-test {
@@ -44,3 +45,25 @@ canvas {
   font-size: 18px;
   color: #333;
 }
+
+/* .js-textCursor {
+  position: absolute;
+  top: 300px;
+  left: 100px;
+  width: 2px;
+  height: 20px;
+  background-color: black;
+  animation: blink 1s infinite;
+} */
+
+/* @keyframes blink {
+  50% {
+    opacity: 0;
+  }
+} */
+
+
+
+
+   
+
